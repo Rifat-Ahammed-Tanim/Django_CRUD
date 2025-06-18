@@ -1,0 +1,38 @@
+{% extends 'master.html' %}
+{% block content %}
+  <div class="container my-5">
+    <div class="row g-4 justify-content-center">
+      {% comment %}Card 1{% endcomment %}
+
+      {% for resume in resumes %}
+        <div class="col-md-6 col-lg-5">
+          <div class="card shadow-sm rounded-4 p-4">
+            <div class="text-center mb-3">
+              <img src="{{ resume.profile_picture.url }}" alt="Profile Picture" class="profile-img mb-3" />
+              <h4 class="mb-1">{{ resume.full_name }}</h4>
+              <p class="text-muted mb-0">{{ resume.position }}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <strong>Email:</strong> {{ resume.email }}
+              </li>
+              <li class="list-group-item">
+                <strong>Phone:</strong> {{ resume.phone }}
+              </li>
+              <li class="list-group-item">
+                <strong>Address:</strong> {{ resume.address }}
+              </li>
+            </ul>
+            <div class="text-center mt-3">
+              <a href="{% url 'update' resume.id %}" class="btn btn-primary me-2">Edit</a>
+              <a href="{% url 'delete' resume.id %}" class="btn btn-danger me-2">Delete</a>
+              <a href="{% url 'view' resume.id %}" class="btn btn-info text-white">View</a>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <p>No resumes found.</p>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

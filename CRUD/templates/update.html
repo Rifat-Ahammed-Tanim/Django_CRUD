@@ -1,0 +1,109 @@
+{% extends 'master.html' %}
+
+{% block content %}
+  <div class="container my-5">
+    <div class="card shadow rounded-4 p-4">
+      <h3 class="mb-4 text-primary">Update Profile</h3>
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Full Name -->
+        <div class="mb-3">
+          <label for="fullName" class="form-label">Full Name</label>
+          <input type="text" class="form-control" id="fullName" name="full_name" value="{{ resume.full_name }}" />
+        </div>
+
+        <!-- Profile Picture -->
+        <div class="mb-3">
+          <label for="profilePicture" class="form-label">Profile Picture</label>
+          <input type="file" class="form-control" id="profilePicture" name="profile_picture" />
+          {% if resume.profile_picture %}
+            <img src="{{ resume.profile_picture.url }}" alt="Profile" width="120" class="mt-2">
+          {% endif %}
+        </div>
+
+        <!-- Email -->
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" name="email" value="{{ resume.email }}" />
+        </div>
+
+        <!-- Phone -->
+        <div class="mb-3">
+          <label for="phone" class="form-label">Phone</label>
+          <input type="tel" class="form-control" id="phone" name="phone" value="{{ resume.phone }}" />
+        </div>
+
+        <!-- Address -->
+        <div class="mb-3">
+          <label for="address" class="form-label">Address</label>
+          <input type="text" class="form-control" id="address" name="address" value="{{ resume.address }}" />
+        </div>
+
+        <!-- Summary -->
+        <div class="mb-3">
+          <label for="summary" class="form-label">Summary</label>
+          <textarea class="form-control" id="summary" name="summary" rows="3">{{ resume.summary }}</textarea>
+        </div>
+
+        <!-- Education Section -->
+        <h5 class="mt-4">Education</h5>
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label for="degree" class="form-label">Degree</label>
+            <input type="text" class="form-control" id="degree" name="degree" value="{{ resume.degree }}" />
+          </div>
+          <div class="col-md-5 mb-3">
+            <label for="institute" class="form-label">Institute Name</label>
+            <input type="text" class="form-control" id="institute" name="institute_name" value="{{ resume.institute_name }}" />
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="graduationYear" class="form-label">Year of Graduation</label>
+            <input type="text" class="form-control" id="graduationYear" name="year_of_graduation" value="{{ resume.year_of_graduation }}" />
+          </div>
+        </div>
+
+        <!-- Experience Section -->
+        <h5 class="mt-4">Experience</h5>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="company" class="form-label">Company Name</label>
+            <input type="text" class="form-control" id="company" name="company_name" value="{{ resume.company_name }}" />
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="position" class="form-label">Position</label>
+            <input type="text" class="form-control" id="position" name="position" value="{{ resume.position }}" />
+          </div>
+          <div class="col-md-2 mb-3">
+            <label for="experienceYears" class="form-label">Years</label>
+            <input type="number" step="0.1" class="form-control" id="experienceYears" name="years_of_experience" value="{{ resume.years_of_experience }}" />
+          </div>
+        </div>
+
+        <!-- Skills -->
+        <div class="mb-3">
+          <label for="skills" class="form-label">Skills</label>
+          <textarea class="form-control" id="skills" name="skills" rows="2">{{ resume.skills }}</textarea>
+        </div>
+
+        <!-- Hobbies -->
+        <div class="mb-3">
+          <label for="hobbies" class="form-label">Hobbies</label>
+          <textarea class="form-control" id="hobbies" name="hobbies" rows="2">{{ resume.hobbies }}</textarea>
+        </div>
+
+        <!-- Achievements -->
+        <div class="mb-3">
+          <label for="achievements" class="form-label">Achievements</label>
+          <textarea class="form-control" id="achievements" name="achievements" rows="2">{{ resume.achievements }}</textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-end">
+          <a href="{% url 'read' %}" class="btn btn-secondary me-2">Back</a>
+          <button type="submit" class="btn btn-info text-white">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}
